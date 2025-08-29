@@ -1,17 +1,11 @@
-install.packages(c("duckduckr","tibble")) # if needed
-devtools::load_all(".")
+devtools::load_all()
+webretrieveR::wr_list_engines()
+# Expect: "ddg" "wikipedia"
 
-hits <- search_web("What is ggplot2?")
-print(hits)
+# Smoke Test 
+cat(webretrieveR::wr_retrieve("R programming language", engines = "ddg"), "\n\n")
+cat(webretrieveR::wr_retrieve("R programming language", engines = "wikipedia"), "\n\n")
 
-# with ellmer (example)
-library(ellmer)
-chat <- ellmer::chat_aws_bedrock(
-  model = "anthropic.claude-3-5-sonnet-20240620-v1:0",
-  system_prompt = "Be concise. Use citations like [1], [2]."
-)
-
-wc <- WebClient$new(k_web = 3, chat_client = chat)
-out <- wc$ask("What is ggplot2 and why use it?")
-cat(out$answer)
-out$citations
+# Combined Engines
+ctx <- webretrieveR::wr_retrieve("Posit Workbench", engines = c("ddg","wikipedia"))
+cat(substr(ctx, 1, 800))  # preview first 800 chars

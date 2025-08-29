@@ -1,9 +1,24 @@
 #' @keywords internal
-`%||%` <- function(a, b) if (!is.null(a) && length(a) > 0 && !is.na(a) && nzchar(a)) a else b
+`%||%` <- function(x, y) if (is.null(x) || length(x) == 0) y else x
 
+#' Build a compact context block from bullets
 #' @keywords internal
-.build_sources_block <- function(hits) {
-  if (is.null(hits) || nrow(hits) == 0) return("SOURCES:\n(none)\n\n")
-  lines <- paste0("[", seq_len(nrow(hits)), "] ", hits$title, " — ", hits$url)
-  paste0("SOURCES:\n", paste(lines, collapse = "\n"), "\n\n")
+wr_build_context <- function(source, query, bullets, max_chars = 1500) {
+  bullets <- unique(bullets[nzchar(bullets)])
+  if (!length(bullets)) {
+    return(paste0("Source: ", source, "\nQuery: ", query, "\n- No results."))
+  }
+  keep <- 0
+  for (i in seq_along(bullets)) {
+    trial <- paste0(
+      "Source: ", source, "\nQuery: ", query, "\n",
+      paste(paste0("- ", bullets[seq_len(i)]), collapse = "\n")
+    )
+    if (nchar(trial) <= max_chars) keep <- i else break
+  }
+  if (keep == 0) keep <- 1
+  paste0(
+    "Source: ", source, "\nQuery: ", query, "\n",
+    paste(paste0("- ", bullets[seq_len(keep)]), collapse = "\n")
+  )
 }
