@@ -2,17 +2,17 @@
 % Please edit documentation in R/engines_wikipedia.R
 \name{wr_engine_wikipedia}
 \alias{wr_engine_wikipedia}
-\title{Wikipedia retriever (search top hit -> summary)}
+\title{Wikipedia retriever (search top hit -> summary, with alias fallback)}
 \usage{
 wr_engine_wikipedia(
   q,
   max_chars = 1500,
   include_urls = TRUE,
   lang = "en",
-  timeout_sec = 6
+  timeout_sec = 8
 )
 }
 \description{
-Wikipedia retriever (search top hit -> summary)
+Wikipedia retriever (search top hit -> summary, with alias fallback)
 }
 \keyword{internal}
