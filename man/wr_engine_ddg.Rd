@@ -2,7 +2,7 @@
 % Please edit documentation in R/engines_ddg.R
 \name{wr_engine_ddg}
 \alias{wr_engine_ddg}
-\title{DuckDuckGo Instant Answer retriever}
+\title{DuckDuckGo Instant Answer retriever with web fallback}
 \usage{
 wr_engine_ddg(
   q,
@@ -13,6 +13,6 @@ wr_engine_ddg(
 )
 }
 \description{
-DuckDuckGo Instant Answer retriever
+DuckDuckGo Instant Answer retriever with web fallback
 }
 \keyword{internal}
