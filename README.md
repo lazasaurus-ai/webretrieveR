@@ -24,7 +24,7 @@ The retrieved snippets are returned as plain text “contexts” you can directl
 ## 🔧 Installation
 ```r
 # Install dev version
-devtools::install_github("your-org/webretrieveR")
+devtools::install_github("lazasaurus-ai/webretrieveR")
 ```
 
 ---
